@@ -88,16 +88,17 @@ function uploadImages($images, $groupID) {
         'access_token' => ACCESS_TOKEN,
     ];
     $response = request(['url' => 'https://api.vk.com/method/photos.getWallUploadServer', 'method' => 'POST', 'data' => $params])['response'];
-
+    $images = explode(', ', $images);
     // Add 1, because file starts from 1
     $imagesLink = [];
     $imagesCnt = count($images)+1;
     for($i = 1; $i < $imagesCnt; $i++) {
         $imagesLink['file'.$i] = curl_file_create($images[$i-1]);
     }
-    $images = request(['url' => $response['upload_url'], 'data' => $imagesLink, 'method' => 'POST']);
-
+    $images = request(['url' => $response['upload_url'], 'data' => $imagesLink, 
+        'method' => 'POST']);
     $images = attachImage($params['group_id'], $images['photo'], $images['hash'], $images['server'])['response'];
+    
     /** 
         Converting images response
         to "photo{owner_id}_{image_id}"
@@ -105,22 +106,12 @@ function uploadImages($images, $groupID) {
     $images = array_map(function($image) {
         return "photo{$image['owner_id']}_{$image['pid']}";
     }, $images);
+    
     // Split photo links by comma
     return implode($images, ', ');
 }
 
-
-function wallPost($groups, $text, $images) {
-    $cntGropus = count($groups);
-    for($i = 0; $i < $cntGropus; $i++) {
-        post($groups[$i], $text, $images);
-        sleep(1);
-    }
-    clearImagesDirectory();
-}
-
 function post($groupID, $text, $images) {
-//	var_dump($groupID);
     $params = [
         'message' => $text,
         'owner_id' => '-'.$groupID,
@@ -129,17 +120,10 @@ function post($groupID, $text, $images) {
     if(!empty($images)) {
         $params['attachments'] = uploadImages($images, $groupID);
     }
-
-    request(['url' => 'https://api.vk.com/method/wall.post', 'method' => 'POST', 'data' => $params]);
+    return request(['url' => 'https://api.vk.com/method/wall.post', 'method' => 'POST', 'data' => $params]);
 }
 
 function getGroupsIdByName(array $groups) {
-    $groups = array_map(function($group) {
-        if(strpos($group, 'public') !== false) {
-            $group = (int) preg_replace('/\D/', '', $group);
-        }
-        return $group;
-    }, $groups);
     $params = [
         'group_ids' => $groups,
     ];
@@ -148,15 +132,17 @@ function getGroupsIdByName(array $groups) {
     $groups = array_map(function($group) {
         return $group['gid'];
     }, $groups);
-    var_dump($groups);
     return $groups;
 }
 
-function clearImagesDirectory() {
+function deleteImages(array $images) {
     if ($handle = opendir(IMAGES_DIR)) {
-        while (false !== ($file = readdir($handle))) { 
-            if ($file != "." && $file != "..") { 
-                unlink(IMAGES_DIR."/".$file);
+        while ($file = readdir($handle)) { 
+            foreach($images as $image) {
+                $imageName = basename($image);
+                if ($file === $imageName) { 
+                    unlink(IMAGES_DIR."/".$file);
+                }
             } 
         }
         closedir($handle); 

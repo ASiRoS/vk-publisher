@@ -17,3 +17,5 @@ You can add more than one group, if you just seperate them by
 space. You can use id or group name. Like these: "futurelife 12345454".
 Be careful, you can't use full address like: "public21345454", "club123432".
 You should copy the part where's id "21345454" or "123432".
+
+ssasa

@@ -53,11 +53,28 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     if(!isset($_POST['groups']) || empty(trim($_POST['groups']))){
         exit('Укажите группы.');
     } else {
+        function btw($b1) {
+            $b1 = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $b1);
+            $b1 = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), 
+            ' ', $b1);
+            return $b1;
+        }
         $groups = trim($_POST['groups']);
-        $groups = explode(' ', $_POST['groups']);
+        $groups = btw($groups);
+        $groups = explode(' ', $groups);
     }
-    wallPost(getGroupsIdByName($groups), $text, $imagesPath);
-    header('Location:'. strok($_SERVER['REQUEST_URI'], '?'));
+    
+    $schedule = new Schedule();
+
+    $groupsID = getGroupsIdByName($groups);
+
+    $postID = $schedule->addPost($text, $imagesPath);
+
+    foreach ($groupsID as $groupID) {
+       $schedule->addRequest($postID, $groupID);
+    }
+    
+    header('Location:'. strtok($_SERVER['REQUEST_URI'], '?'));
 }
 ?>
 </body>
