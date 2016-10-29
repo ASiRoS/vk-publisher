@@ -18,4 +18,9 @@ space. You can use id or group name. Like these: "futurelife 12345454".
 Be careful, you can't use full address like: "public21345454", "club123432".
 You should copy the part where's id "21345454" or "123432".
 
-ssasa
+To post something you need to get the page:
+"<yourSiteAddress>/vk-publisher/post.php?post"
+To view the request you need to open this page:
+"<yourSiteAddress>/vk-publisher/post.php?show"
+
+This has been added to use later using and get the page with cron.
