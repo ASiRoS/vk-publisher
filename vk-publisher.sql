@@ -33,20 +33,6 @@ CREATE TABLE `posts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `text`, `imagesLinks`) VALUES
-(15, 'SELECT text, imagesLinks FROM post WHERE id = \'12\';', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg'),
-(16, '112437872', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg'),
-(17, 'sassas', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (3rd copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (4th copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (another copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (copy).jpg'),
-(18, '112437872\r\nhome_medusa', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (3rd copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (4th copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (another copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (copy).jpg'),
-(19, '112437872\r\nhome_medusa', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (3rd copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (4th copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (another copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (copy).jpg'),
-(20, '112437872\r\nhome_medusa', '/home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4.jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (3rd copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (4th copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (another copy).jpg, /home/asiro/Desktop/sites/mama/vk-publisher/images/kDuBTq-gHc4 (copy).jpg');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `requests`
 --
 
@@ -55,14 +41,6 @@ CREATE TABLE `requests` (
   `postID` int(11) NOT NULL,
   `VKGroupID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `requests`
---
-
-INSERT INTO `requests` (`id`, `postID`, `VKGroupID`) VALUES
-(20, 20, 112437872),
-(21, 20, 119296602);
 
 --
 -- Indexes for dumped tables
@@ -79,8 +57,6 @@ ALTER TABLE `posts`
 --
 ALTER TABLE `requests`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `postID` (`postID`),
-  ADD KEY `postID_2` (`postID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
