@@ -1,10 +1,10 @@
 <?php
 /** Debug mode **/
-define('DEBUG_MODE', true);
+define('DEBUG_MODE', false);
 
 /** Application **/
-define('CLIENT_ID', '5674326 ');
-define('CLIENT_SECRET', 'x3nSvALRqLaBPQGRSt7D');
+define('CLIENT_ID', '');
+define('CLIENT_SECRET', '');
 
 /** Settings **/
 define('REDIRECT_URI', 'https://oauth.vk.com/blank.html');
@@ -17,7 +17,7 @@ define('ACCESS_TOKEN', '');
 define('IMAGES_DIR', dirname(__FILE__).'/images');
 
 /** Database **/
-define('DB_HOST', 'sql310.byethost18.com');
-define('DB_USER', 'b18_19056221');
-define('DB_PASSWORD', 'cemga2610');
-define('DB_NAME', 'b18_19056221_vkpublisher');
+define('DB_HOST', '');
+define('DB_USER', '');
+define('DB_PASSWORD', '');
+define('DB_NAME', '');
